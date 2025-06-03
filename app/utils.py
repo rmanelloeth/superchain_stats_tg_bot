@@ -12,4 +12,4 @@ async def get_base_tx_count(address: str) -> int:
 
     # Получаем количество исходящих транзакций (nonce)
     tx_count = await w3.eth.get_transaction_count(address)
-    return tx_count, address
+    return tx_count
