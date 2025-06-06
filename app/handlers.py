@@ -12,8 +12,10 @@ import operations
 
 router = Router()
 
+
 async def send_main_menu(message: Message):
-    await message.answer("MAIN MENU", reply_markup=kb.main)
+    await message.edit_text("📊 <b>Superchain Stats Bot</b>\n"
+    "Base · OP · Ink · Lisk · Unichain", reply_markup=kb.main, parse_mode='HTML')
 
 
 @router.message(CommandStart())
@@ -21,12 +23,12 @@ async def cmd_start(message: Message):
     ids = operations.get_user_ids()
     if str(message.from_user.id) not in ids:
         operations.add_new_user(str(message.from_user.id),str(message.from_user.username))
-    await message.reply("Привет, я помогу тебе собрать статистику Superchain", reply_markup=kb.main)
-
-@router.message(F.text == 'Add wallet')
-async def add_wallet(message: Message, state: FSMContext):
+    await message.answer("📊 <b>Superchain Stats Bot</b>\n"
+    "Base · OP · Ink · Lisk · Unichain", reply_markup=kb.main, parse_mode='HTML')
+@router.callback_query(F.data == 'add_wallet')
+async def add_wallet(callback: CallbackQuery, state: FSMContext):
     await state.set_state(WalletState.add_label)
-    await message.answer('Введи номер аккаунта')
+    await callback.message.edit_text('Введи номер аккаунта')
 
 @router.message(WalletState.add_label)
 async def input_label(message: Message, state: FSMContext):
@@ -50,25 +52,33 @@ async def input_wallet(message: Message, state: FSMContext):
 
 
 @router.callback_query(F.data =='main_menu')
-async def back_to_main_menu(query: CallbackQuery ):
+async def back_to_main_menu(query: CallbackQuery):
     await query.answer()
     await send_main_menu(query.message)
 
-@router.message(F.text == 'My wallets')
-async def get_wallets_info(message: Message, state: FSMContext):
-    wallets, labels = operations.get_user_wallets(str(message.from_user.id))
-    await state.clear()
+@router.callback_query(F.data == 'my_wallets')
+async def get_wallets_info(callback: CallbackQuery):
+    wallets, labels = operations.get_user_wallets(str(callback.from_user.id))
     if not wallets:
-        await message.reply('У вас еще нет добавленных кошельков')
+        await callback.message.reply('У вас еще нет добавленных кошельков')
     else:
-        await message.answer('Ваши кошельки', reply_markup= await kb.build_reply_keyboard(labels))
+        await callback.message.edit_text('Ваши кошельки', reply_markup= await kb.build_inline_keyboard(wallets,labels))
 
 
-@router.message(F.text.startswith("wallet "))
-async def wallet_actions(message: Message, state: FSMContext):
+@router.callback_query(F.data.startswith("wallet "))
+async def wallet_actions(callback: CallbackQuery, state: FSMContext):
+    label, wallet = callback.data.split("|", 2)
     await state.set_state(WalletState.current_wallet)
-    await state.update_data(current_wallet=message.text)
-    await message.answer(text=f'{message.text} menu',reply_markup=kb.wallet)
+    await state.update_data(current_wallet=wallet)
+    await callback.message.edit_text(text=f'{label} menu\n{wallet}',reply_markup=kb.wallet)
+
+@router.callback_query(F.data == 'stats')
+async def get_wallet_stats(callback:CallbackQuery,state: FSMContext):
+    data = await state.get_data()
+    wallet = data.get('current_wallet')
+    if not wallet:
+        await callback.message.edit_text(f'Для кошелька {wallet} требуется обновить статистику')
+
 
 
 

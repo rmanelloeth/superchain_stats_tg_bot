@@ -26,6 +26,36 @@ def create_table_all_users():
             connection.close()
             print(f'connection closed')
 
+
+def create_stats_table():
+    try:
+        connection = psycopg2.connect(
+            host=config.host,
+            user=config.user_name,
+            password=config.password,
+            database=config.database_name)
+        connection.autocommit = True
+
+        with connection.cursor() as cursor:
+            cursor.execute(
+                """CREATE TABLE stats (
+                  wallet varchar(25) PRIMARY KEY ,
+                  OPTIMISM varchar(100),
+                  BASE varchar(100),
+                  INK varchar(100),
+                  SONEIUM varchar(100),
+                  LISK varchar(100),
+                  UNICHAIN varchar(100)
+                  );"""
+            )
+            print(f'Таблица Пользователей создана')
+    except Exception as e:
+        print(f'Error to connect DB: {e}')
+    finally:
+        if connection:
+            connection.close()
+            print(f'connection closed')
+
 def create_table_wallets():
     try:
         connection = psycopg2.connect(
@@ -77,5 +107,5 @@ def create_state_machine():
             print(f'connection closed')
 
 
-create_table_wallets()
+create_stats_table()
 
