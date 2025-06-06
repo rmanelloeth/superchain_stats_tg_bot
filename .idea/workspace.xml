@@ -4,13 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ca1aef82-6568-4b1b-8695-ed594ef6f175" name="Changes" comment="commit 4">
-      <change afterPath="$PROJECT_DIR$/app/handlers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/keyboards.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
+    <list default="true" id="ca1aef82-6568-4b1b-8695-ed594ef6f175" name="Changes" comment="Рабочий код для base">
+      <change afterPath="$PROJECT_DIR$/install_db.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/operations.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/handlers.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/handlers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/keyboards.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/keyboards.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/states.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/states.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,10 +53,12 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Python.handlers.executor": "Run",
+    "Python.install_db.executor": "Run",
+    "Python.operations.executor": "Run",
     "Python.run.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+    "settings.editor.selected.configurable": "preferences.keymap"
   }
 }]]></component>
   <component name="SharedIndexes">
@@ -113,7 +117,39 @@
       <option name="project" value="LOCAL" />
       <updated>1748947292800</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Добавил проверку кол-ва транзакций на тестовом коше">
+      <option name="closed" value="true" />
+      <created>1748953209333</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1748953209333</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Рабочий код для base">
+      <option name="closed" value="true" />
+      <created>1748958626820</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1748958626820</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Рабочий код для base">
+      <option name="closed" value="true" />
+      <created>1748958634646</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1748958634646</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Рабочий код для base">
+      <option name="closed" value="true" />
+      <created>1748958660463</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1748958660463</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -132,6 +168,8 @@
     <MESSAGE value="bye" />
     <MESSAGE value="commit 3" />
     <MESSAGE value="commit 4" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit 4" />
+    <MESSAGE value="Добавил проверку кол-ва транзакций на тестовом коше" />
+    <MESSAGE value="Рабочий код для base" />
+    <option name="LAST_COMMIT_MESSAGE" value="Рабочий код для base" />
   </component>
 </project>
