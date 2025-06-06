@@ -56,7 +56,9 @@ def get_user_wallets(id: str):
             cursor.execute(f"SELECT * FROM wallets WHERE user_id = '{id}';")
             rows = cursor.fetchall()
             wallets = [row[1] for row in rows]
-            return wallets
+            labels = [row[2] for row in rows]
+            # print(wallets)
+            return wallets, labels
     except Exception as e:
         print(f'Error to connect DB: {e}')
     finally:
@@ -64,7 +66,7 @@ def get_user_wallets(id: str):
             connection.close()
             # print(f'connection closed')
 
-def add_new_wallet(id: str, wallet: str):
+def add_new_wallet(id: str, wallet: str, label: str):
     try:
         connection = psycopg2.connect(
             host=config.host,
@@ -73,9 +75,9 @@ def add_new_wallet(id: str, wallet: str):
             database=config.database_name)
         connection.autocommit = True
         with connection.cursor() as cursor:
-            wallets = get_user_wallets(id)
+            wallets,_ = get_user_wallets(id)
             if wallet not in wallets:
-                cursor.execute("""INSERT INTO wallets VALUES (%s, %s)""", (id, wallet))
+                cursor.execute("""INSERT INTO wallets VALUES (%s, %s, %s)""", (id, wallet, f'wallet {label}'))
                 return False
             else:
                 return True
@@ -86,7 +88,6 @@ def add_new_wallet(id: str, wallet: str):
             connection.close()
             # print(f'connection closed')
 
-
 # add_new_user('rmanello','dsadsd')
-# get_user_wallets(str(391295263))
-add_new_wallet('13123123','312312')
+# get_user_wallets(str(2))
+# add_new_wallet('2','0x75c6648796FE7fad760219816f4fBeC8065007ee','3')

@@ -39,10 +39,11 @@ def create_table_wallets():
             cursor.execute(
                 """CREATE TABLE wallets (
                   user_id varchar(25),
-                  wallet varchar(100)
+                  wallet varchar(100),
+                  label varchar(15)
                   );"""
             )
-            print(f'Таблица Пользователей создана')
+            print(f'Таблица Wallets')
     except Exception as e:
         print(f'Error to connect DB: {e}')
     finally:
@@ -76,6 +77,5 @@ def create_state_machine():
             print(f'connection closed')
 
 
+create_table_wallets()
 
-
-get_user_ids()
