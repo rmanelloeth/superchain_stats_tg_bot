@@ -120,7 +120,7 @@ def update_stat(user_id: str, wallet: str, results: dict):
 
         with connection.cursor() as cursor:
             # Жестко заданный порядок колонок
-            known_columns = ['optimism', 'base', 'ink', 'soneium', 'lisk', 'unichain']
+            known_columns = ['optimism', 'base', 'ink', 'soneium', 'lisk', 'unichain', 'mode']
             valid_items = {}
 
             for chain in known_columns:

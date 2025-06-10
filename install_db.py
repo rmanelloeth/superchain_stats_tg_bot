@@ -46,7 +46,8 @@ def create_stats_table():
                   INK varchar(100),
                   SONEIUM varchar(100),
                   LISK varchar(100),
-                  UNICHAIN varchar(100)
+                  UNICHAIN varchar(100),
+                  MODE varchar(100)
                   );"""
             )
             print(f'Таблица Пользователей создана')

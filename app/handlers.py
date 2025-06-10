@@ -26,7 +26,7 @@ async def cmd_start(message: Message):
     if str(message.from_user.id) not in ids:
         operations.add_new_user(str(message.from_user.id),str(message.from_user.username))
     await message.answer("📊 <b>Superchain Stats Bot</b>\n"
-    "Base · OP · Ink · Lisk · Unichain", reply_markup=kb.main, parse_mode='HTML')
+    "Base · OP · Ink · Lisk · Unichain · Mode", reply_markup=kb.main, parse_mode='HTML')
 @router.callback_query(F.data == 'add_wallet')
 async def add_wallet(callback: CallbackQuery, state: FSMContext):
     await state.set_state(WalletState.add_label)
@@ -94,7 +94,8 @@ async def get_wallet_stats(callback:CallbackQuery,state: FSMContext):
             f"<b>Ink:</b> {stats[4]}\n"
             f"<b>Soneium:</b> {stats[5]}\n"
             f"<b>Lisk:</b> {stats[6]}\n"
-            f"<b>Unichain:</b> {stats[7]}"
+            f"<b>Unichain:</b> {stats[7]}\n"
+            f"<b>Mode:</b> {stats[8]}"
         )
         await callback.message.edit_text(text=text, reply_markup=kb.back_to_wallets, parse_mode='HTML',disable_web_page_preview=True)
 
@@ -133,16 +134,16 @@ async def see_all_stats(callback: CallbackQuery):
         )
         return
 
-    header = f"{'Label':<10} {'Wallet':<42} {'OPT':>5} {'BASE':>5} {'INK':>5} {'SONEIUM':>5} {'LISK':>5} {'UNI':>5}"
+    header = f"{'Label':<10} {'Wallet':<42} {'OPT':>5} {'BASE':>5} {'INK':>5} {'SONEIUM':>5} {'LISK':>5} {'UNI':>5} {'MODE':>5} "
     rows = [header, "-" * len(header)]
 
     for label, wallet, stat_data in all_stats:
         if not stat_data:
             # Если нет данных — ставим прочерки
-            row = f"{label:<10} {wallet:<42} {'-':>5} {'-':>5} {'-':>5} {'-':>5} {'-':>5} {'-':>5}"
+            row = f"{label:<10} {wallet:<42} {'-':>5} {'-':>5} {'-':>5} {'-':>5} {'-':>5} {'-':>5} {'-':>5}"
         else:
             stat = stat_data[0]  # первая строка
-            row = f"{label:<10} {wallet:<42} {stat[2]:>5} {stat[3]:>5} {stat[4]:>5} {stat[5]:>5} {stat[6]:>5} {stat[7]:>5}"
+            row = f"{label:<10} {wallet:<42} {stat[2]:>5} {stat[3]:>5} {stat[4]:>5} {stat[5]:>5} {stat[6]:>5} {stat[7]:>5} {stat[8]:>5}"
         rows.append(row)
 
     text = "<pre>\n" + "\n".join(rows) + "\n</pre>"

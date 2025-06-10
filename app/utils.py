@@ -3,12 +3,13 @@ from web3.providers.async_rpc import AsyncHTTPProvider
 
 # Словарь сетей: chain_id → RPC URL
 NETWORKS = {
-    'OPTIMISM': "https://optimism-rpc.publicnode.com",         # OPTIMISM
-    'BASE': "https://mainnet.base.org",                 # Base
-    'INK': "https://ink.drpc.org",                   # INK
-    'SONEIUM':  "https://rpc.soneium.org",           # Soneium
-    'LISK':  "https://lisk.drpc.org",                # Lisk
-    'UNICHAIN':  "https://unichain.drpc.org"         # Unichnain
+    'OPTIMISM': "https://optimism-rpc.publicnode.com",  # OPTIMISM
+    'BASE': "https://mainnet.base.org",             # Base
+    'INK': "https://ink.drpc.org",                  # INK
+    'SONEIUM':  "https://soneium.drpc.org",         # Soneium
+    'LISK':  "https://lisk.drpc.org",               # Lisk
+    'UNICHAIN':  "https://unichain.drpc.org",       # Unichnain
+    'MODE':"https://mode.drpc.org"                  # Mode
 }
 
 async def get_tx_counts_all_chains(address: str) -> dict[int, int | str]:
