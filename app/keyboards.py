@@ -2,9 +2,10 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMar
 from aiogram.utils.keyboard import InlineKeyboardBuilder, ReplyKeyboardBuilder
 
 main = InlineKeyboardMarkup(inline_keyboard=[
-    [InlineKeyboardButton(text='My wallets', callback_data='my_wallets'),
-     InlineKeyboardButton(text='See stats',callback_data='see_stats')],
-    [InlineKeyboardButton(text='Add wallet',callback_data='add_wallet')]
+    [InlineKeyboardButton(text='My wallets', callback_data='my_wallets')],
+     [InlineKeyboardButton(text='See stats',callback_data='see_stats')],
+    [InlineKeyboardButton(text='Add wallet',callback_data='add_wallet'),
+     InlineKeyboardButton(text='Update all stats', callback_data='update_all_stats')]
 ])
 
 menu = InlineKeyboardMarkup(inline_keyboard=[
@@ -19,13 +20,11 @@ wallet = InlineKeyboardMarkup(inline_keyboard=[
      InlineKeyboardButton(text='Back',callback_data='my_wallets')]
 ])
 
-back = InlineKeyboardMarkup(inline_keyboard=[
-    [InlineKeyboardButton(text='Back', callback_data='back')]])
+back_to_wallets = InlineKeyboardMarkup(inline_keyboard=[
+    [InlineKeyboardButton(text='Back', callback_data='my_wallets')]])
 
-async def build_reply_keyboard(list: list):
-    keyboard = ReplyKeyboardBuilder()
-    keyboard = [[KeyboardButton(text=item)] for item in list]
-    return ReplyKeyboardMarkup(keyboard=keyboard, resize_keyboard=True)
+undo = InlineKeyboardMarkup(inline_keyboard=[
+    [InlineKeyboardButton(text='Back', callback_data='main_menu')]])
 
 async def build_inline_keyboard(wallets: list, labels: list):
     keyboard = InlineKeyboardBuilder()

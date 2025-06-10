@@ -39,7 +39,8 @@ def create_stats_table():
         with connection.cursor() as cursor:
             cursor.execute(
                 """CREATE TABLE stats (
-                  wallet varchar(25) PRIMARY KEY ,
+                  user_id varchar(25),
+                  wallet varchar(50) PRIMARY KEY,
                   OPTIMISM varchar(100),
                   BASE varchar(100),
                   INK varchar(100),

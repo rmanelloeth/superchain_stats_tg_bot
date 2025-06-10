@@ -3,28 +3,28 @@ from web3.providers.async_rpc import AsyncHTTPProvider
 
 # Словарь сетей: chain_id → RPC URL
 NETWORKS = {
-    8453: "https://base.llamarpc.com",         # Base
-    10:   "https://0xrpc.io/op",               # Optimism
-    130:  "https://unichain.drpc.org",         # Unichain
-    57073: "https://ink.drpc.org",             # Ink
-    1868:  "https://soneium.drpc.org",         # Soneium
-    1135:  "https://lisk.drpc.org",            # Lisk
+    'OPTIMISM': "https://optimism-rpc.publicnode.com",         # OPTIMISM
+    'BASE': "https://mainnet.base.org",                 # Base
+    'INK': "https://ink.drpc.org",                   # INK
+    'SONEIUM':  "https://rpc.soneium.org",           # Soneium
+    'LISK':  "https://lisk.drpc.org",                # Lisk
+    'UNICHAIN':  "https://unichain.drpc.org"         # Unichnain
 }
 
 async def get_tx_counts_all_chains(address: str) -> dict[int, int | str]:
     results = {}
 
-    for chain_id, rpc in NETWORKS.items():
+    for chain, rpc in NETWORKS.items():
         try:
             w3 = AsyncWeb3(AsyncHTTPProvider(rpc))
 
             if not w3.is_address(address):
-                results[chain_id] = "❌ invalid address"
+                results[chain] = "❌ invalid address"
                 continue
 
             tx_count = await w3.eth.get_transaction_count(address)
-            results[chain_id] = tx_count
+            results[chain] = tx_count
         except Exception as e:
-            results[chain_id] = f"⚠️ error: {str(e)}"
+            results[chain] = f"⚠️ error: {str(e)}"
 
     return results
