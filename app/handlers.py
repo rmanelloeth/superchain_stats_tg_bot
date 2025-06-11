@@ -4,6 +4,7 @@ from aiogram import Router, F
 from aiogram.fsm.context import FSMContext
 from aiogram.types import ReplyKeyboardRemove
 from typing import Literal
+from app.proxies import proxies
 
 import app.keyboards as kb
 
@@ -104,8 +105,7 @@ async def update_stat(callback: CallbackQuery, state: FSMContext):
     data = await state.get_data()
     wallet = data.get('current_wallet')
     label = data.get('current_label')
-    results = await get_tx_counts_all_chains(wallet)
-    # print(results)
+    results = await get_tx_counts_all_chains(wallet, proxies)
     operations.update_stat(str(callback.from_user.id), wallet, results)
     await callback.message.edit_text(f'Обновил стату для кошелька: {label}\n{wallet}',reply_markup=kb.back_to_wallets)
 
@@ -154,7 +154,7 @@ async def see_all_stats(callback: CallbackQuery):
 async def update_all_stats(callback: CallbackQuery):
     wallets, labels=operations.get_user_wallets(str(callback.from_user.id))
     for wallet, label in zip(wallets, labels):
-        results = await get_tx_counts_all_chains(wallet)
+        results = await get_tx_counts_all_chains(wallet, proxies)
         operations.update_stat(str(callback.from_user.id), wallet, results)
         await callback.message.edit_text(f'Обновляю стату для кошелька: {label}\n{wallet}',
                                          reply_markup=kb.back_to_wallets)
